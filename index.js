@@ -107,7 +107,7 @@ function exec(str, cols, opts) {
 	for (var i = 0, word; (word = words[i]) !== undefined; i++) {
 		var rowLength = stringWidth(rows[rows.length - 1]);
 
-		if (rowLength) {
+		if (rowLength || word === '') {
 			rows[rows.length - 1] += ' ';
 			rowLength++;
 		}
@@ -135,7 +135,7 @@ function exec(str, cols, opts) {
 	}
 
 	pre = rows.map(function (r) {
-		return r.trim();
+		return options.trim === false ? r : r.trim();
 	}).join('\n');
 
 	for (var j = 0; j < pre.length; j++) {

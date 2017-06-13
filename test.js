@@ -85,6 +85,14 @@ test('no word-wrapping', t => {
 	t.is(res2, 'The q\nuick\nbrown\n[31mfox j[39m\n[31mumped[39m\n[31mover[39m\n[31m[39mthe l\nazy [32md[39m\n[32mog an[39m\n[32md the[39m\n[32mn ran[39m\n[32maway[39m\n[32mwith[39m\n[32mthe u[39m\n[32mnicor[39m\n[32mn.[39m');
 });
 
+test('no word-wrapping and no trimming', t => {
+	const res = fn(fixture3, 10, {wordWrap: false, trim: false});
+	t.is(res, '12345678\n901234567890 \n12345');
+
+	const res2 = fn(fixture, 5, {wordWrap: false, trim: false});
+	t.is(res2, 'The q\nuick \nbrown \n[31mfox j[39m\n[31mumped [39m\n[31mover [39m\n[31m[39mthe l\nazy [32md[39m\n[32mog an[39m\n[32md the[39m\n[32mn ran [39m\n[32maway [39m\n[32mwith [39m\n[32mthe u[39m\n[32mnicor[39m\n[32mn.[39m');
+});
+
 // https://github.com/chalk/wrap-ansi/issues/10
 test.failing('supports fullwidth characters', t => {
 	t.is(fn('안녕하세', 4, {hard: true}), '안녕\n하세');
